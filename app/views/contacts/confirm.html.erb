@@ -1,0 +1,21 @@
+ <div class= "container">
+<div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+<h3>以下の内容で投稿する</h3>
+<%= form_for(@contacts) do |f| %>
+<%= f.hidden_field:name %>
+<%= f.hidden_field:email %>
+<%= f.hidden_field :contents %>
+
+<p>お名前:<%= @contacts.name %></p>
+<p>メールアドレス:<%= @contacts.email %></p>
+<p>ご用件<%= @contacts.contents %></p>
+<%= f.submit"投稿する" %>
+<% end %>
+<%= form_for(@contacts, url:new_contact_path, method:'get') do |f| %>
+<%= f.hidden_field :name, class:'form_control' %>
+<%= f.hidden_field :email,class:'form_control' %>
+<%= f.hidden_field :contents,class:'form_control' %>
+<%= f.submit "もどる", name:'back',class: 'btn btn-default' %>
+<% end %>
+</div>
+</div>
