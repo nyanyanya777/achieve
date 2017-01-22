@@ -1,0 +1,45 @@
+<h2>ユーザー情報</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :メールアドレス %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+  
+
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :新しいパスワード %> <i>(変更する場合のみ)</i><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> 文字以上入力してください</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード確認 %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :現在のパスワード %> <i>(変更前のパスワードを入力してください)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "変更" %>
+  </div>
+<% end %>
+
+<h3>アカウント消去</h3>
+
+<p>本当によろしいですか? <%= button_to "消去", registration_path(resource_name), data: { confirm: "消去しますか？" }, method: :delete %></p>
+
+<%= link_to "戻る", :back %>
