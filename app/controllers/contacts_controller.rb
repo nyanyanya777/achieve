@@ -11,7 +11,7 @@ class ContactsController < ApplicationController
   def create
   @contacts = Contact.create(contacts_params)
   if @contacts.save
-  redirect_to top_index_path, notice:"お問い合わせありがとうございます"
+  redirect_to root_path, notice:"お問い合わせありがとうございます"
   else render 'new'
   end
   end
