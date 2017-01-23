@@ -4,8 +4,8 @@ class BlogsController < ApplicationController
   before_action :set_blog, only: [:edit, :update, :destroy]
   
   def index
-    @blog = Blog.all
-  end
+   @blogs = Blog.all
+ end
   
   def new 
     if params[:back]
@@ -49,6 +49,7 @@ class BlogsController < ApplicationController
     @blog.destroy
     redirect_to blogs_path, notice:"ブログを削除しました"
   end
+  
   
   private
   def blogs_params
