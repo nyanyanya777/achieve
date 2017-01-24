@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
  devise_for :users
+ 
+ if Rails.env.development?
+  mount LetterOpenerWeb::Engine, at: "/letter_opener"
+end
 
  resources :blogs, only:[:index, :new, :create, :edit, :update, :destroy] do
    collection do
@@ -18,4 +22,3 @@ Rails.application.routes.draw do
  root 'top#index'
  
 end
-
