@@ -36,7 +36,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
-config.action_mailer.default_url_options = { host: 'fathomless-waters-15357.herokuapp.com' }
+config.action_mailer.default_url_options = { host: 'dive-into-code-koheinaito.c9users.io' }
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings =
 {
