@@ -9,7 +9,8 @@ class NoticeMailer < ApplicationMailer
   
   def sendmail_contact(contact)
     @contact = contact
-    mail to: "@contacts = Contacts.email",
+    
+    mail to: "contact.email",
     subject: 'お問い合わせ完了'
   end
   

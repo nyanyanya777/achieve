@@ -9,7 +9,7 @@ class ContactsController < ApplicationController
     end
   
   def create
-  @contacts = Contact.create(contacts_params)
+  @contacts = Contact.new(contacts_params)
   NoticeMailer.sendmail_contact(@contacts).deliver
   if @contacts.save
   redirect_to root_path, notice:"お問い合わせありがとうございます"
