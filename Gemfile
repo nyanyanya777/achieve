@@ -44,7 +44,6 @@ group :development, :test do
 
 gem 'twitter-bootstrap-rails'
 
-gem 'jquery-turbolinks'
 end
 
 
@@ -58,4 +57,5 @@ gem 'devise'
 gem 'faker'
 gem 'rails_admin'
 gem 'cancan'
+gem 'jquery-turbolinks'
 
