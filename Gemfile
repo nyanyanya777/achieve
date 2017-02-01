@@ -59,4 +59,4 @@ gem 'rails_admin'
 gem 'cancan'
 gem 'jquery-turbolinks'
 gem 'twitter-bootstrap-rails'
-
+gem 'activeresource'
