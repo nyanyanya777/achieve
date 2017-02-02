@@ -1,4 +1,3 @@
-source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -43,7 +42,7 @@ group :development, :test do
   gem 'spring'
   gem 'pry-rails'
   gem 'better_errors'
-
+  gem 'dotenv-rails'
 end
 
 
@@ -60,3 +59,7 @@ gem 'cancan'
 gem 'jquery-turbolinks'
 gem 'twitter-bootstrap-rails'
 gem 'activeresource'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'carrierwave'
