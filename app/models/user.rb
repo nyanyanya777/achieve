@@ -2,11 +2,10 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable,:omniauthable
-
-         mount_uploader :avatar, AvatarUploader
-
-  has_many :blogs
+         :confirmable, :omniauthable
+         has_many :image_urls
+         has_many :blogs
+  mount_uploader :avatar, AvatarUploader
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by(email: auth.info.email)
