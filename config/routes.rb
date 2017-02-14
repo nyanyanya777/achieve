@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener"
 end
 
- resources :blogs, only:[:index, :new, :create, :edit, :update, :destroy] do
+ resources :blogs do
+   resources :comments
    collection do
     post:confirm
     end

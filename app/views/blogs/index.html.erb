@@ -4,10 +4,12 @@
 
 <h1>ブログ一覧</h1>
 <%= link_to "ブログを作成する", new_blog_path, class:'btn btn-default' %>
-<% @blogs.each do |blog| %>
+<% @blog.each do |blog| %>
 <div class ="row">
   <%= profile_img(blog.user) %>
+   <%= link_to blog_path(blog) do %>
   <h4><strong><%= blog.title %></strong></h4>
+ <% end %>
   <p><%= blog.content %></p>
 ユーザー名:<%= blog.user.name %>
 <br>
