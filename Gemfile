@@ -43,6 +43,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'dotenv-rails'
+  gem 'did_you_mean'
 end
 
 
@@ -63,3 +64,5 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'carrierwave'
+gem 'flexbox-rails'
+gem 'pusher'
