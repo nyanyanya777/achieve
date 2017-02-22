@@ -5,6 +5,9 @@ Devise.setup do |config|
 
   config.mailer_sender = 'noreply@yourdomain'
 
+  config.secret_key = '81b6f21c21b16913a61e6b7741e163759aaf4a64448f05d66e06389ea26d26292ad2028c3e179d3a4179ce33e3e2a7772
+cf7744bbf6d459c7d4c3d3354b75bc7'
+
 
   require 'devise/orm/active_record'
 
