@@ -23,6 +23,7 @@
 </div>
 
 <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+  </br>
   <div class="koharu">
     <%= f.text_area :body, class: "form-control", placeholder: 'メッセージを入力' %>
   </div>
