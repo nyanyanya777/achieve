@@ -8,6 +8,7 @@
       <% user = User.find(message.user_id) %>
       <div class="item">
         <div class="content">
+          </br>
           <div class="header"><strong><%= user.name %></strong> <%= message.message_time %></div>
           <div class="list">
             <div class="item">
@@ -23,7 +24,7 @@
 
 <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
   <div class="field">
-    <%= f.text_area :body, class: "form-control" %>
+    <%= f.text_area :body, class: "form-control", placeholder: 'メッセージを入力' %>
   </div>
     <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
   <div>

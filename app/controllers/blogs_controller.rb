@@ -2,6 +2,8 @@ class BlogsController < ApplicationController
   before_action :authenticate_user!
 
   before_action :set_blog, only: [:edit, :update, :destroy, :show]
+  before_action :current_user, only: [:edit, :update]
+
 
   def index
    @blog = Blog.all
