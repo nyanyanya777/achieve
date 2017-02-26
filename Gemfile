@@ -67,3 +67,4 @@ gem 'carrierwave'
 gem 'flexbox-rails'
 gem 'pusher'
 gem "rails_12factor", group: :production
+gem 'fog'
