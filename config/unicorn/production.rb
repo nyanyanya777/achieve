@@ -1,41 +1,64 @@
-#ワーカーの数。後述
-$worker  = 2
-#何秒経過すればワーカーを削除するのかを決める
-$timeout = 30
-#自分のアプリケーション名、currentがつくことに注意。
-$app_dir = "/var/www/achieve/current"
-#リクエストを受け取るポート番号を指定。後述
-$listen  = File.expand_path 'tmp/sockets/unicorn.sock', $app_dir
-#PIDの管理ファイルディレクトリ
-$pid     = File.expand_path 'tmp/pids/unicorn.pid', $app_dir
-#エラーログを吐き出すファイルのディレクトリ
-$std_log = File.expand_path 'log/unicorn.log', $app_dir
 
-# 上記で設定したものが適応されるよう定義
-worker_processes  $worker
-working_directory $app_dir
-stderr_path $std_log
-stdout_path $std_log
-timeout $timeout
-listen  $listen
-pid $pid
+lock '3.6.0'
 
-#ホットデプロイをするかしないかを設定
-preload_app true
+# デプロイするアプリケーション名
+set :application, 'achieve'
 
-#fork前に行うことを定義。後述
-before_fork do |server, worker|
-  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
-  old_pid = "#{server.config[:pid]}.oldbin"
-  if old_pid != server.pid
-    begin
-      Process.kill "QUIT", File.read(old_pid).to_i
-    rescue Errno::ENOENT, Errno::ESRCH
+# cloneするgitのレポジトリ（xxxxxxxx：ユーザ名、yyyyyyyy：アプリケーション名）
+set :repo_url, 'https://github.com/nyanyanya777/achieves'
+
+# deployするブランチ。デフォルトはmasterなのでなくても可。
+set :branch, ENV['BRANCH'] || 'master'
+
+# deploy先のディレクトリ。
+set :deploy_to, '/var/www/achieve'
+
+# シンボリックリンクをはるフォルダ・ファイル
+set :linked_files, %w{.env config/secrets.yml}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}
+
+# 保持するバージョンの個数(※後述)
+set :keep_releases, 5
+
+# Rubyのバージョン
+set :rbenv_ruby, '2.3.0'
+set :rbenv_type, :system
+
+#出力するログのレベル。
+set :log_level, :debug
+
+namespace :deploy do
+  desc 'Restart application'
+  task :restart do
+    invoke 'unicorn:restart'
+  end
+
+  desc 'Create database'
+  task :db_create do
+    on roles(:db) do |host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rake, 'db:create'
+        end
+      end
     end
   end
-end
 
-#fork後に行うことを定義。後述
-after_fork do |server, worker|
-  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
+  desc 'Run seed'
+  task :seed do
+    on roles(:app) do
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rake, 'db:seed'
+        end
+      end
+    end
+  end
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+    end
+  end
 end
