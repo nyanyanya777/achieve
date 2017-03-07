@@ -55,7 +55,7 @@ header {
  padding-bottom: 15%;
  width: 100%;
  background-size: cover;
- background-image: url(<%= asset_path "header.png" %>);
+ background-image:　url("header.png");
  background-attachment: fixed;
 }
 
